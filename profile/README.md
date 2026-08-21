@@ -55,14 +55,17 @@ No tape object, no `requires_grad`, no `.backward()`.
 
 ## Where it actually stands
 
-twill is an early prototype. The current release is v1.5.1.1. The reference
-implementation is a single Go binary with no dependencies, about 16,000 lines.
-MIT licensed.
+twill is an early prototype. The current release is v1.7.1. The reference
+implementation is a single Go binary with no dependencies, 26,638 lines
+excluding tests. MIT licensed.
 
 What is not done yet:
 
 - It is interpreted. Tensor ops loop in Go, and there is no vectorized or GPU
-  backend.
+  backend. There is a tracing compiler behind `TWILL_TRACE=1`; it is correct and
+  on most programs slower end to end, so it ships off. twill's
+  [docs/CODEGEN.md](https://github.com/twill-lang/twill/blob/main/docs/CODEGEN.md)
+  has the measurements and the reason.
 - Autodiff is reverse-mode and first-order. `grad(grad(f))` is refused rather
   than silently answered with zero; `hessian` gives second derivatives via
   forward-mode jets.
@@ -85,22 +88,28 @@ What is not done yet:
 | [twill](https://github.com/twill-lang/twill) | The language and the reference implementation: run, check, fmt, test, REPL, the standard library, and the self-hosted implementation under `src/`. |
 
 **The ecosystem.** Nine libraries written in twill, against `mode systems`, the
-systems subset described in twill's `docs/self-hosting.md`. That subset is still
-landing, so **none of these run yet.** Each is a real program written ahead of
-the language that runs it, and each carries a `docs/needs.md` listing what the
-language still has to provide. Those lists are their useful output today.
+systems subset described in twill's `docs/self-hosting.md`. Each was written
+ahead of the language that runs it, and for a long time this paragraph said none
+of them ran. **They run now.** `twill test tests` passes in all nine against
+v1.7.1: 61 suites, 0 failures, counted per repo below. Each still carries a
+`docs/needs.md` recording what it asked the language for and which of those
+arrived.
 
-| Repo | What it is |
-| --- | --- |
-| [spool](https://github.com/twill-lang/spool) | The package manager. |
-| [loom](https://github.com/twill-lang/loom) | The training framework: epochs, callbacks, checkpointing, metrics, over a step function you pass in. |
-| [warp](https://github.com/twill-lang/warp) | Data pipelines and dataset loaders. |
-| [skein](https://github.com/twill-lang/skein) | Text and sequence handling: tokenisers with an offset map that points at the source, not the normalised string. |
-| [heddle](https://github.com/twill-lang/heddle) | Probabilistic programming and Bayesian inference. NUTS, HMC, ADVI, and the diagnostics that catch a sampler lying. |
-| [selvedge](https://github.com/twill-lang/selvedge) | Model serialisation and the model registry. |
-| [shuttle](https://github.com/twill-lang/shuttle) | Inference and serving. No network server: twill has no sockets, and none is planned. |
-| [bobbin](https://github.com/twill-lang/bobbin) | Benchmarking and profiling. Median and interquartile range, never mean and sigma. |
-| [weft](https://github.com/twill-lang/weft) | Plots, in the terminal and out of it. Terminal charts and SVG. |
+Two caveats worth having before you clone. heddle's suite takes about 16 minutes
+because two of its files are real NUTS runs, and warp's example needs an MNIST
+download it will tell you how to fetch.
+
+| Repo | What it is | Suites |
+| --- | --- | --- |
+| [spool](https://github.com/twill-lang/spool) | The package manager. | 6 |
+| [loom](https://github.com/twill-lang/loom) | The training framework: epochs, callbacks, checkpointing, metrics, over a step function you pass in. | 8 |
+| [warp](https://github.com/twill-lang/warp) | Data pipelines and dataset loaders. | 5 |
+| [skein](https://github.com/twill-lang/skein) | Text and sequence handling: tokenisers with an offset map that points at the source, not the normalised string. | 11 |
+| [heddle](https://github.com/twill-lang/heddle) | Probabilistic programming and Bayesian inference. NUTS, HMC, ADVI, and the diagnostics that catch a sampler lying. | 8 |
+| [selvedge](https://github.com/twill-lang/selvedge) | Model serialisation and the model registry. | 6 |
+| [shuttle](https://github.com/twill-lang/shuttle) | Inference and serving. No network server: twill has no sockets, and none is planned. | 6 |
+| [bobbin](https://github.com/twill-lang/bobbin) | Benchmarking and profiling. Median and interquartile range, never mean and sigma. | 5 |
+| [weft](https://github.com/twill-lang/weft) | Plots, in the terminal and out of it. Terminal charts and SVG. | 6 |
 
 ## Start here
 
