@@ -71,7 +71,7 @@ What is not done yet:
   forward-mode jets.
 - The shape checker is best-effort, not a full type system. It flags a mismatch
   only when it is certain, and stays quiet otherwise.
-- As of v1.5.0 the twill compiler written in twill runs on the Go bootstrap and
+- As of v1.4.0 the twill compiler written in twill runs on the Go bootstrap and
   reproduces the reference across every stage. It runs on the bootstrap rather
   than as its own Go-free binary; bootstrapping to a standalone twill-built
   compiler is the next step. `twill check` matched the Go command byte-for-byte
