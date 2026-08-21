@@ -91,7 +91,7 @@ What is not done yet:
 systems subset described in twill's `docs/self-hosting.md`. Each was written
 ahead of the language that runs it, and for a long time this paragraph said none
 of them ran. **They run now.** `twill test tests` passes in all nine against
-v1.7.1: 60 suites, 0 failures, counted per repo below. Each still carries a
+v1.7.1: 61 suites, 0 failures, counted per repo below. Each still carries a
 `docs/needs.md` recording what it asked the language for and which of those
 arrived.
 
@@ -107,7 +107,7 @@ download it will tell you how to fetch.
 | [skein](https://github.com/twill-lang/skein) | Text and sequence handling: tokenisers with an offset map that points at the source, not the normalised string. | 11 |
 | [heddle](https://github.com/twill-lang/heddle) | Probabilistic programming and Bayesian inference. NUTS, HMC, ADVI, and the diagnostics that catch a sampler lying. | 8 |
 | [selvedge](https://github.com/twill-lang/selvedge) | Model serialisation and the model registry. | 6 |
-| [shuttle](https://github.com/twill-lang/shuttle) | Inference and serving. No network server: twill has no sockets, and none is planned. | 5 |
+| [shuttle](https://github.com/twill-lang/shuttle) | Inference and serving. No network server: twill has no sockets, and none is planned. | 6 |
 | [bobbin](https://github.com/twill-lang/bobbin) | Benchmarking and profiling. Median and interquartile range, never mean and sigma. | 5 |
 | [weft](https://github.com/twill-lang/weft) | Plots, in the terminal and out of it. Terminal charts and SVG. | 6 |
 
