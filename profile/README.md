@@ -74,10 +74,17 @@ What is not done yet:
 - As of v1.4.0 the twill compiler written in twill runs on the Go bootstrap and
   reproduces the reference across every stage. It runs on the bootstrap rather
   than as its own Go-free binary; bootstrapping to a standalone twill-built
-  compiler is the next step. `twill check` matched the Go command byte-for-byte
-  on every corpus file and `twill fmt` on every one it formats, bar a by-design
-  blank-line divergence. Those runs were counted at v1.5.0, at 443 and 89 files;
-  the corpus has grown since and the counts are a snapshot, not a running total.
+  compiler is still the next step. `twill check` matched the Go command
+  byte-for-byte on every corpus file and `twill fmt` on every one it formats, bar
+  a by-design blank-line divergence. Those runs were counted at v1.5.0, at 443
+  and 89 files; the corpus has grown since and the counts are a snapshot, not a
+  running total.
+- v1.7.1 is the stronger evidence for the same claim. The Go checker learned
+  dtypes, and the two checkers were compared over **405 files** of `std`, `src`,
+  `examples` and `testdata/cases`: identical output, character for character, and
+  not one new diagnostic on a program that never mentions a dtype. Two
+  independent implementations of one checker that disagree about nothing is what
+  a self-hosted language is supposed to be able to show.
 
 ## The repositories
 
